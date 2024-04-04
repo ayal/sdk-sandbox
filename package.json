@@ -1,0 +1,53 @@
+{
+  "name": "myapp",
+  "packageManager": "yarn@3.5.1",
+  "scripts": {
+    "start": "ts-node ./index.ts",
+    "dbuild": "nerdctl build --platform=linux/amd64 -t myapp .",
+    "drun": "nerdctl run -p 49000:3000 -d myapp",
+    "dtag": "nerdctl tag myapp:latest gcr.io/$PROJECT_ID/myapp:latest",
+    "dpush": "nerdctl push gcr.io/$PROJECT_ID/myapp:latest",
+    "ddeploy": "gcloud run deploy myapp-service --image gcr.io/$PROJECT_ID/myapp:latest --allow-unauthenticated --region us-central1 --port 3000 --memory 2G",
+    "ddeploy1": "gcloud run deploy myapp-service --image gcr.io/$PROJECT_ID/github.com/ayal/sdk-sandbox:0831fd03e5bbe686d7d57351dbc3ab5ffb4e3d46 --allow-unauthenticated --region us-central1 --port 3000 --memory 2G"
+  },
+  "dependencies": {
+    "@wix/activity-counters": "latest",
+    "@wix/auth-management": "latest",
+    "@wix/blog": "latest",
+    "@wix/bookings": "latest",
+    "@wix/business-tools": "latest",
+    "@wix/captcha": "latest",
+    "@wix/comments": "latest",
+    "@wix/crm": "latest",
+    "@wix/data": "latest",
+    "@wix/design-system": "latest",
+    "@wix/ecom": "latest",
+    "@wix/email-marketing": "latest",
+    "@wix/events": "latest",
+    "@wix/forms": "latest",
+    "@wix/forum": "latest",
+    "@wix/groups": "latest",
+    "@wix/inbox": "latest",
+    "@wix/loyalty": "latest",
+    "@wix/marketing": "latest",
+    "@wix/marketing-tags": "latest",
+    "@wix/media": "latest",
+    "@wix/members": "latest",
+    "@wix/notifications": "latest",
+    "@wix/pricing-plans": "latest",
+    "@wix/redirects": "latest",
+    "@wix/reviews": "latest",
+    "@wix/sdk": "latest",
+    "@wix/secrets": "latest",
+    "@wix/stores": "latest",
+    "@wix/table-reservations": "latest",
+    "@wix/workflows": "latest",
+    "body-parser": "^1.20.2",
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.4.4"
+  }
+}
