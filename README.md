@@ -27,7 +27,7 @@ platform is important for mac
   see the new service created: https://console.cloud.google.com/run
   note the port that should fit the dockerfile, memory that should be more than default, and platform in build step if built on mac
   note the `allow-unauthenticated` is for public access to the app 
-  test your service in the new url
+5. test your service in the new url - root route should show "hellow world", or test `/eval` with `?code=<SDKCODE>&authorization=SDKAUTHTOKEN`
 
 ## Full google cloud flow:
 
