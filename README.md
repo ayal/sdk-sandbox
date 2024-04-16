@@ -40,7 +40,7 @@ platform is important for mac
  - 3rd step in `cloudbuild.yaml` is the deployment
  - might need to give the "service account" permissions according to https://cloud.google.com/build/docs/deploying-builds/deploy-cloud-run. 
  - for permissions see IAM dashboard: https://console.cloud.google.com/iam-admin/iam
-- run trigger and wait for build, you will see 3 steps:
+- run trigger, see the builds and wait for build, you will see 3 steps:
     - build
     - push: a new artifact in registry (https://console.cloud.google.com/artifacts)
     - run: a new service (https://console.cloud.google.com/run)
