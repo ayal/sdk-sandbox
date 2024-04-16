@@ -1,5 +1,5 @@
 import express from 'express';
-import { modules } from './modules';
+import { modules } from './modules.ts';
 import { createClient } from '@wix/sdk';
 import bodyParser from 'body-parser';
 
@@ -54,7 +54,7 @@ app.use((req, res, next) => {
 });
 
 app.all('/', async (req, res) => {
-  res.send('Hello World!!!!');
+  res.send('Hello World ! ! !');
 });
 
 app.all('/eval', async (req, res) => {

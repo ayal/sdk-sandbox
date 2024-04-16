@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "allowImportingTsExtensions": true,
     "baseUrl": ".",
     "paths": {
       "@/*": [
@@ -38,5 +39,5 @@
   "exclude": [
     "cypress.config.ts",
     "cypress/**/*.ts"
-  ]
+  ],
 }

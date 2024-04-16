@@ -8,7 +8,9 @@
     "dtag": "nerdctl tag myapp:latest gcr.io/$PROJECT_ID/myapp:latest",
     "dpush": "nerdctl push gcr.io/$PROJECT_ID/myapp:latest",
     "ddeploy": "gcloud run deploy myapp-service --image gcr.io/$PROJECT_ID/myapp:latest --allow-unauthenticated --region us-central1 --port 3000 --memory 2G",
-    "ddeploy1": "gcloud run deploy myapp-service --image gcr.io/$PROJECT_ID/github.com/ayal/sdk-sandbox:0831fd03e5bbe686d7d57351dbc3ab5ffb4e3d46 --allow-unauthenticated --region us-central1 --port 3000 --memory 2G"
+    "ddeploy1": "gcloud run deploy myapp-service --image gcr.io/$PROJECT_ID/github.com/ayal/sdk-sandbox:0831fd03e5bbe686d7d57351dbc3ab5ffb4e3d46 --allow-unauthenticated --region us-central1 --port 3000 --memory 2G",
+    "denorun": "deno run --unstable-sloppy-imports --allow-net --allow-read --allow-env index.ts",
+    "denodeploy": "deployctl deploy"
   },
   "dependencies": {
     "@wix/activity-counters": "latest",
@@ -20,7 +22,6 @@
     "@wix/comments": "latest",
     "@wix/crm": "latest",
     "@wix/data": "latest",
-    "@wix/design-system": "latest",
     "@wix/ecom": "latest",
     "@wix/email-marketing": "latest",
     "@wix/events": "latest",

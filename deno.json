@@ -1,0 +1,46 @@
+{
+  "imports": {
+    "./modules": "./src/modules",
+    "body-parser": "npm:body-parser@latest",
+    "@wix/sdk": "npm:@wix/sdk@latest",
+    "express": "npm:express@latest",
+    "@wix/activities": "npm:@wix/activities@latest",
+    "@wix/activity-counters": "npm:@wix/activity-counters@latest",
+    "@wix/auth-management": "npm:@wix/auth-management@latest",
+    "@wix/blog": "npm:@wix/blog@latest",
+    "@wix/bookings": "npm:@wix/bookings@latest",
+    "@wix/business-tools": "npm:@wix/business-tools@latest",
+    "@wix/captcha": "npm:@wix/captcha@latest",
+    "@wix/comments": "npm:@wix/comments@latest",
+    "@wix/crm": "npm:@wix/crm@latest",
+    "@wix/data": "npm:@wix/data@latest",
+    "@wix/ecom": "npm:@wix/ecom@latest",
+    "@wix/email-marketing": "npm:@wix/email-marketing@latest",
+    "@wix/events": "npm:@wix/events@latest",
+    "@wix/forms": "npm:@wix/forms@latest",
+    "@wix/forum": "npm:@wix/forum@latest",
+    "@wix/groups": "npm:@wix/groups@latest",
+    "@wix/inbox": "npm:@wix/inbox@latest",
+    "@wix/loyalty": "npm:@wix/loyalty@latest",
+    "@wix/marketing": "npm:@wix/marketing@latest",
+    "@wix/marketing-tags": "npm:@wix/marketing-tags@latest",
+    "@wix/media": "npm:@wix/media@latest",
+    "@wix/members": "npm:@wix/members@latest",
+    "@wix/pricing-plans": "npm:@wix/pricing-plans@latest",
+    "@wix/notifications": "npm:@wix/notifications@latest",
+    "@wix/redirects": "npm:@wix/redirects@latest",
+    "@wix/reviews": "npm:@wix/reviews@latest",
+    "@wix/secrets": "npm:@wix/secrets@latest",
+    "@wix/stores": "npm:@wix/stores@latest",
+    "@wix/table-reservations": "npm:@wix/table-reservations@latest",
+    "@wix/workflows": "npm:@wix/workflows@latest"
+  },
+  "deploy": {
+    "project": "5430a42a-0d0f-4c88-ab94-38da009c70f8",
+    "exclude": [
+      "**/node_modules"
+    ],
+    "include": [],
+    "entrypoint": "index.ts"
+  }
+}
