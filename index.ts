@@ -54,20 +54,19 @@ app.use((req, res, next) => {
 });
 
 app.all('/', async (req, res) => {
+  console.log('fetch called on root');
   res.send('Hello World ! ! ! !');
 });
 
 app.all('/eval', async (req, res) => {
-  console.log('req.body', req.body);
+  console.log('eval called', 'req.body', req.body);
   const code = req.body?.code || req.query?.code;
-  console.log('headers', req.headers);
   const auth = req.headers?.authorization || req.query?.authorization || '';
 
   try {
     const wixClient = createClient({
       auth: {
         getAuthHeaders: async () => {
-          console.log('getAuthHeaders', auth);
           return {
             headers: {
               authorization: auth as string || '',

@@ -2007,8 +2007,10 @@
         "npm:@wix/table-reservations@latest",
         "npm:@wix/workflows@latest",
         "npm:body-parser@^1.20.2",
+        "npm:dotenv@^16.4.5",
         "npm:express@^4.19.2",
-        "npm:ts-node@^10.4.0",
+        "npm:node-fetch@^3.3.2",
+        "npm:ts-node@^10.9.2",
         "npm:typescript@^5.4.5"
       ]
     }

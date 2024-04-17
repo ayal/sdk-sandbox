@@ -1,4 +1,3 @@
-
 const CODE = "return (async () => { try { const { items } = await wixClient.stores.products.queryProducts().find(); return items; } catch (e) { console.error(e); throw e; } })();";
 
 const testService = async (serviceURL?: string) => {
@@ -6,6 +5,22 @@ const testService = async (serviceURL?: string) => {
         console.error('Service URL not provided');
         return;
     }
+
+    // test a simple get to root:
+    /*
+    try {
+        console.log('fetching root...', serviceURL);
+        const res = await fetch(serviceURL);
+        if (!res.ok) {
+            console.error(`Error fetching data from service: ${serviceURL}`, res.status);
+            const data = await res.text();
+            console.error(data);
+            return;
+        }
+    }
+    catch (e: any) {
+        console.error(`Exception while fetching data from service: ${serviceURL}`, e.message, e);
+    }*/
 
     try {
         const res = await fetch(`${serviceURL}/eval`, {
@@ -20,6 +35,7 @@ const testService = async (serviceURL?: string) => {
         });
 
         if (!res.ok) {
+            console.error(`Error fetching data from service: ${serviceURL}`, res.status);
             const data = await res.text();
             console.error(data);
             return;
@@ -29,7 +45,7 @@ const testService = async (serviceURL?: string) => {
         return data;
     }
     catch (e: any) {
-        console.error(`Error fetching data from service: ${serviceURL}`, e.message);
+        console.error(`Exception while fetching data from service: ${serviceURL}`, e.message, e);
     }
 };
 
@@ -38,18 +54,19 @@ const runTest = async (serviceURL?: string, serviceName?: string) => {
     console.time(`${serviceName}-service-test-time`);
     const data = await testService(serviceURL);
     console.timeEnd(`${serviceName}-service-test-time`);
-    console.log(`${serviceName} service test result.`, 'success?', data?.result?.length > 0);
+    console.log(`${serviceName} service test result.`, 'success?', (data as any)?.result?.length > 0);
 }
 
 (async () => {
-    const localServiceURL = 'http://localhost:3000';
+    // const localServiceURL = 'http://localhost:3000'; bug in deno https://github.com/denoland/deno/issues/17968
+    const localServiceURL = 'http://127.0.0.1:3000';
     const gcloudServiceURL = process.env.GCLOUD_SERVICE_URL;
     const denoServiceURL = process.env.DENO_SERVICE_URL;
 
     try {
+        await runTest(localServiceURL, 'local');
         await runTest(gcloudServiceURL, 'gcloud');
         await runTest(denoServiceURL, 'deno');
-        await runTest(localServiceURL, 'local');
     }
     catch (e) {
         console.error('Error:', e);
