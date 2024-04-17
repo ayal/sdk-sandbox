@@ -67,3 +67,10 @@ https://console.cloud.google.com/billing
 ```
 
 https://dash.deno.com/projects/
+
+
+## TEST:
+
+`yarn test-eval`
+
+need `GCLOUD_SERVICE_URL`, `DENO_SERVICE_URL` and `AUTHORIZATION` env vars
