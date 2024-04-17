@@ -58,3 +58,12 @@ curl '<SERVICE_URL>/eval' \
 
 check gcloud billing / usage: 
 https://console.cloud.google.com/billing
+
+## DENO:
+
+```
+"denorun": "deno run --allow-net --allow-read --allow-env index.ts",
+"denodeploy": "deployctl deploy --prod"
+```
+
+https://dash.deno.com/projects/

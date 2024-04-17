@@ -2234,6 +2234,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"dotenv@npm:^16.4.5":
+  version: 16.4.5
+  resolution: "dotenv@npm:16.4.5"
+  checksum: 48d92870076832af0418b13acd6e5a5a3e83bb00df690d9812e94b24aff62b88ade955ac99a05501305b8dc8f1b0ee7638b18493deb6fe93d680e5220936292f
+  languageName: node
+  linkType: hard
+
 "ee-first@npm:1.1.1":
   version: 1.1.1
   resolution: "ee-first@npm:1.1.1"
@@ -2622,8 +2629,9 @@ __metadata:
     "@wix/table-reservations": latest
     "@wix/workflows": latest
     body-parser: ^1.20.2
+    dotenv: ^16.4.5
     express: ^4.19.2
-    ts-node: ^10.4.0
+    ts-node: ^10.9.2
     typescript: ^5.4.5
   languageName: unknown
   linkType: soft
@@ -2830,7 +2838,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-node@npm:^10.4.0":
+"ts-node@npm:^10.9.2":
   version: 10.9.2
   resolution: "ts-node@npm:10.9.2"
   dependencies:
