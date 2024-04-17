@@ -58,8 +58,14 @@ const runTest = async (serviceURL?: string, serviceName?: string) => {
 }
 
 (async () => {
-    // const localServiceURL = 'http://localhost:3000'; bug in deno https://github.com/denoland/deno/issues/17968
-    const localServiceURL = 'http://127.0.0.1:3000';
+    // localhost bug in deno / node<20
+    // https://github.com/denoland/deno/issues/17968
+    // https://stackoverflow.com/questions/72390154/econnrefused-when-making-a-request-to-localhost-using-fetch-in-node-js
+    // https://github.com/nodejs/undici/issues/1602
+    // localhost works with node 20
+    const localServiceURL = 'http://localhost:3000'; 
+    // this works with node 18 as well
+    // const localServiceURL = 'http://127.0.0.1:3000';
     const gcloudServiceURL = process.env.GCLOUD_SERVICE_URL;
     const denoServiceURL = process.env.DENO_SERVICE_URL;
 
@@ -69,6 +75,6 @@ const runTest = async (serviceURL?: string, serviceName?: string) => {
         await runTest(denoServiceURL, 'deno');
     }
     catch (e) {
-        console.error('Error:', e);
+        console.error('Error running tests:', e);
     }
 })()
