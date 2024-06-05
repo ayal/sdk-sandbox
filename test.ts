@@ -1,5 +1,5 @@
-//const CODE = "return (async () => { try { const { items } = await wixClient.stores.products.queryProducts().find(); return items; } catch (e) { console.error(e); throw e; } })();";
-const CODE = `return (async () => {
+const CODE = "return (async () => { try { const { items } = await wixClient.stores.products.queryProducts().find(); return items; } catch (e) { console.error(e); throw e; } })();";
+/*const CODE = `return (async () => {
     try {
       const product = {
         name: "Sample Product",
@@ -23,6 +23,7 @@ const CODE = `return (async () => {
     }
   })();
   `
+*/
 
 const testService = async (serviceURL?: string) => {
     if (!serviceURL) {
