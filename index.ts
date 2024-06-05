@@ -73,15 +73,16 @@ app.all('/eval', async (req, res) => {
 
   const globalObject = globalThis || global || window;
   globalObject.fetch = fetchProxy;
-  */
 
   console.log('>>>>>typeof fetch', typeof fetch, typeof globalThis, typeof global, typeof window);
+  */
+
 
   try {
     const wixClient = createClient({
       auth: {
         getAuthHeaders: async () => {
-          console.log('getAuthHeaders called', 'auth', auth);
+          console.log('getAuthHeaders called', 'auth', auth?.length);
           return {
             headers: {
               Authorization: auth as string || '',

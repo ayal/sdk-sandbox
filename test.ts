@@ -1,4 +1,28 @@
-const CODE = "return (async () => { try { const { items } = await wixClient.stores.products.queryProducts().find(); return items; } catch (e) { console.error(e); throw e; } })();";
+//const CODE = "return (async () => { try { const { items } = await wixClient.stores.products.queryProducts().find(); return items; } catch (e) { console.error(e); throw e; } })();";
+const CODE = `return (async () => {
+    try {
+      const product = {
+        name: "Sample Product",
+        costAndProfitData: {
+          itemCost: 10
+        },
+        productType: "physical",
+        priceData: {
+          price: 20
+        },
+        description: "This is a sample product description.",
+        brand: "Sample Brand",
+        visible: true
+      };
+  
+      const result = await wixClient.stores.products.createProduct(product);
+      return \`Product created successfully with ID: \${result.product._id}\`;
+    } catch (e) {
+      console.error(e);
+      throw e;
+    }
+  })();
+  `
 
 const testService = async (serviceURL?: string) => {
     if (!serviceURL) {
@@ -26,7 +50,7 @@ const testService = async (serviceURL?: string) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': process.env.AUTHORIZATION || '' /* should be Authorization with capital, otherwise we will might have 2 headers! */
+                'Authorization': process.env.AUTHORIZATION || ''
             },
             body: JSON.stringify({
                 code: CODE
@@ -69,7 +93,7 @@ const runTest = async (serviceURL?: string, serviceName?: string) => {
     const denoServiceURL = process.env.DENO_SERVICE_URL;
 
     try {
-        await runTest(localServiceURL, 'local');
+        await runTest(localServiceURL, 'local'); // can be either `yarn start` or `yarn denorunA`
         await runTest(gcloudServiceURL, 'gcloud');
         await runTest(denoServiceURL, 'deno');
     }
