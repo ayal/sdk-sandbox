@@ -54,7 +54,7 @@ const runTest = async (serviceURL?: string, serviceName?: string) => {
     console.time(`${serviceName}-service-test-time`);
     const data = await testService(serviceURL);
     console.timeEnd(`${serviceName}-service-test-time`);
-    console.log(`${serviceName} service test result.`, 'success?', (data as any)?.result?.length > 0);
+    console.log(`${serviceName} service test result.`, 'success?', (data as any)?.result?.length > 0, data);
 }
 
 (async () => {
@@ -70,11 +70,11 @@ const runTest = async (serviceURL?: string, serviceName?: string) => {
     const denoServiceURL = process.env.DENO_SERVICE_URL;
 
     try {
-        await runTest(localServiceURL, 'local');
-        await runTest(gcloudServiceURL, 'gcloud');
+        // await runTest(localServiceURL, 'local');
+        // await runTest(gcloudServiceURL, 'gcloud');
         await runTest(denoServiceURL, 'deno');
     }
     catch (e) {
         console.error('Error running tests:', e);
     }
-})()
+})();

@@ -55,7 +55,7 @@ app.use((req, res, next) => {
 
 app.all('/', async (req, res) => {
   console.log('fetch called on root');
-  res.send('Hello World ! ! ! !');
+  res.send('Hello World! Date: 5/6/24');
 });
 
 app.all('/eval', async (req, res) => {
@@ -63,13 +63,28 @@ app.all('/eval', async (req, res) => {
   const code = req.body?.code || req.query?.code;
   const auth = req.headers?.authorization || req.query?.authorization || '';
 
+  /*
+  const originalFetch = fetch;
+
+  const fetchProxy = async (...args: any[]) => {
+    console.log('fetchProxy called', 'args', args);
+    return originalFetch(args[0], args[1]);
+  }
+
+  const globalObject = globalThis || global || window;
+  globalObject.fetch = fetchProxy;
+  */
+
+  console.log('>>>>>typeof fetch', typeof fetch, typeof globalThis, typeof global, typeof window);
+
   try {
     const wixClient = createClient({
       auth: {
         getAuthHeaders: async () => {
+          console.log('getAuthHeaders called', 'auth', auth);
           return {
             headers: {
-              authorization: auth as string || '',
+              Authorization: auth as string || '',
             },
           };
         },
