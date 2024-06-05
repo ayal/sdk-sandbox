@@ -66,6 +66,8 @@ https://console.cloud.google.com/billing
 "denodeploy": "deployctl deploy --prod"
 ```
 
+before `denodeploy` might need to push to github? does it deploy from remote repo or from local repo?
+
 https://dash.deno.com/projects/
 
 
