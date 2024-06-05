@@ -6,7 +6,6 @@ const testService = async (serviceURL?: string) => {
         return;
     }
 
-    // test a simple get to root:
     /*
     try {
         console.log('fetching root...', serviceURL);
@@ -27,7 +26,7 @@ const testService = async (serviceURL?: string) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': process.env.AUTHORIZATION || ''
+                'Authorization': process.env.AUTHORIZATION || '' /* should be Authorization with capital, otherwise we will might have 2 headers! */
             },
             body: JSON.stringify({
                 code: CODE
