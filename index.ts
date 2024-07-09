@@ -33,9 +33,22 @@ export function stringify(obj: any) {
   return str;
 }
 
+
+
 const getErrorSerialized = (error: any) => {
   const newError = JSON.parse(stringify(error));
+
+  let message = error.message;
+  try {
+    const messageObj = JSON.parse(message);
+    message = messageObj.message;
+  }
+  catch (ex: any) {}
+  
+  newError.message = message;
+  newError.details = error.details;
   delete newError.stack;
+
   return { ...newError, ...error, appError: true };
 };
 

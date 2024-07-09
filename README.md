@@ -3,7 +3,7 @@
 ## Partial google cloud flow:
 - use rancher (nerdctl) + gcloud cli
 - rancher config: use "containered" / consider if you need kubernetes or not.
-- run rancher from terminal otherwise there is a problem to detect `.docker/config` which you need for auth
+- run rancher from terminal otherwise there is a problem to detect `.docker/config` which you need for auth (something like: `/Applications/Rancher\ Desktop.app/Contents/MacOS/Rancher\ Desktop`)
 - see Dockerfile for how docker is built, port is 3000
 - steps:
 1. build image: `nerdctl build --platform=linux/amd64 -t myapp .`
