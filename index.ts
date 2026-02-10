@@ -43,8 +43,8 @@ const getErrorSerialized = (error: any) => {
     const messageObj = JSON.parse(message);
     message = messageObj.message;
   }
-  catch (ex: any) {}
-  
+  catch (ex: any) { }
+
   newError.message = message;
   newError.details = error.details;
   delete newError.stack;
@@ -58,7 +58,7 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Methods', '*');
   res.header('Access-Control-Allow-Headers', '*');
 
-  if (req.method === 'OPTIONS') {  
+  if (req.method === 'OPTIONS') {
     return res.status(200).json({});
   }
   else {
@@ -72,7 +72,7 @@ app.all('/', async (req, res) => {
 });
 
 app.all('/eval', async (req, res) => {
-  console.log('eval called', 'req.body', req.body);
+  console.log('sandbox: eval called', 'req.body', req.body);
   const code = req.body?.code || req.query?.code;
   const auth = req.headers?.authorization || req.query?.authorization || '';
 
@@ -90,12 +90,31 @@ app.all('/eval', async (req, res) => {
   console.log('>>>>>typeof fetch', typeof fetch, typeof globalThis, typeof global, typeof window);
   */
 
+  const originalConsoleLog = console.log;
+  const originalConsoleError = console.error;
+  const logs: any[] = [];
+  console.log = (...args: any[]) => {
+    const isSandboxLog = typeof args[0] === 'string' && args[0]?.indexOf?.('sandbox:') !== -1;
+    if (!isSandboxLog) {
+      logs.push(args);
+    }
+    originalConsoleLog(...args);
+  }
+  console.error = (...args: any[]) => {
+    const isSandboxLog = typeof args[0] === 'string' && args[0]?.indexOf?.('sandbox:') !== -1;
+    if (!isSandboxLog) {
+      logs.push(args);
+    }
+    originalConsoleError(...args);
+  }
+
+
 
   try {
     const wixClient = createClient({
       auth: {
         getAuthHeaders: async () => {
-          console.log('getAuthHeaders called', 'auth', auth?.length);
+          console.log('sandbox: getAuthHeaders called', 'auth', auth?.length);
           return {
             headers: {
               Authorization: auth as string || '',
@@ -106,20 +125,24 @@ app.all('/eval', async (req, res) => {
       modules,
     });
 
-    console.log('will execute code', code);
+    console.log('sandbox: will execute code', code);
 
     const evalResponse = eval(`
       (async () => {
         try {
+          console.log('sandbox: executing code...');
           let innerEvalResponse = await (async () => {
             ${code};
           })();
           if (innerEvalResponse) {
-            console.log('execution result', innerEvalResponse);
+            console.log('sandbox: execution result', innerEvalResponse);
             return innerEvalResponse;
           }
+          else {
+            console.log('sandbox: no execution result');
+          }
         } catch (ex) {
-          console.error('>>>>errorrrrrr', ex);
+          console.error('sandbox: wrapper-error', ex);
           return ex;
         }
       })();
@@ -127,7 +150,7 @@ app.all('/eval', async (req, res) => {
 
     let info: any = 'no info';
     if (evalResponse instanceof Promise) {
-      console.debug(`executing command...`);
+      console.debug(`sandbox: executing command...`);
       info = await evalResponse;
 
       if (info === null || info === '') {
@@ -141,9 +164,9 @@ app.all('/eval', async (req, res) => {
 
     const infoToSend = info instanceof Error ? getErrorSerialized(info) : info;
 
-    console.log('infoToSend', infoToSend);
+    console.log('sandbox: infoToSend', infoToSend);
 
-    res.json({ result: infoToSend });
+    res.json({ result: infoToSend, logs, });
   }
   catch (error: any) {
     console.error(error);
@@ -152,7 +175,7 @@ app.all('/eval', async (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`App listening at http://localhost:${port}`);
+  console.log(`sandbox: App listening at http://localhost:${port}`);
 });
 
 
